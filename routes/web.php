@@ -69,7 +69,7 @@ Route::prefix('study')->group(function() {
 
         Route::prefix('request')->group(function() {
 
-            Route::get('/', 'RequestController@index');
+            Route::match(['get', 'post'], '/', 'RequestController@index');
         });
     });
     });
