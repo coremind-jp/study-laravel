@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+use App\Http\Middleware\LogMiddleware;
 
 Route::get('/', function () {
     return view('welcome');
@@ -72,6 +73,12 @@ Route::prefix('study')->group(function() {
             Route::match(['get', 'post'], '/', 'RequestController@index');
         });
     });
+    });
+
+    Route::prefix('middleware')->group(function() {
+
+        Route::get('log', 'MiddlewareController@log')
+            ->middleware(LogMiddleware::class);
     });
 
     Route::fallback(function() {
