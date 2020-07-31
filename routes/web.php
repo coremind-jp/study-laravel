@@ -62,7 +62,8 @@ Route::prefix('study')->group(function() {
 
 
         Route::prefix('request')->group(function() {
-            Route::match(['get', 'post'], '/', 'RequestController@index');
+            Route::get('/', 'RequestController@create');
+            Route::post('/', 'RequestController@post');
         });
     });
     });

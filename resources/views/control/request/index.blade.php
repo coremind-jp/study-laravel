@@ -13,49 +13,74 @@
 
 
   @component('components.block', ['about' => 'Form'])
-    <form method="POST" enctype="multipart/form-data">
+    <form method="POST" action="/study/control/request/" enctype="multipart/form-data">
       <div class="form-group">
         <label>Text</label>
-        <input class="form-control" name="name" placeholder="Enter your name">
+
+        <input class="form-control" name="name" value="{{ old('name') }}" placeholder="Enter your name">
+        
+        @error('name')
+          <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
       </div>
       
       <div class="form-group">
-        <label>Checkbox</label>
-        <br>
+        <label>Checkbox</label><br>
+
         @for($i = 1; $i <= 5; $i++)
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="checkbox" name="checkbox[]" value="{{ $i }}">
+            <input class="form-check-input" type="checkbox" name="checkbox[]" value="{{ $i }}"
+              @if(in_array($i, old('checkbox', []))) checked @endif
+            >
             <label class="form-check-label">{{ $i }}</label>
           </div>
         @endfor
+
+        @error('checkbox')
+          <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
       </div>
 
       <div class="form-group">
-        <label>Radiobutton</label>
-        <br>
+        <label>Radiobutton</label><br>
+
         @for($i = 1; $i <= 5; $i++)
           <div class="form-check form-check-inline">
-            <input class="form-check-input" type="radio" name="radio" value="{{ $i }}">
+            <input class="form-check-input" type="radio" name="radio" value="{{ $i }}"
+              @if($i == old('radio'))) checked @endif
+            >
             <label class="form-check-label">{{ $i }}</label>
           </div>
         @endfor
+
+        @error('radio')
+          <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
       </div>
 
       <div class="form-group">
         <label>Select</label>
+
         <select class="form-control" name="select">
-          <option value="0"></option>
-          <option>1</option>
-          <option>2</option>
-          <option>3</option>
-          <option>4</option>
-          <option>5</option>
+          <option value=""></option>
+          @for($i = 1; $i <= 5; $i++)
+            <option @if($i == old('select')) selected @endif>{{ $i }}</option>
+          @endfor
         </select>
+
+        @error('select')
+          <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
       </div>
 
       <div class="form-group">
         <label>File upload</label>
-        <input type="file" class="form-control-file" name="upload">
+
+        <input type="file" class="form-control-file" name="upload" value="{{ old('upload') }}">
+
+        @error('upload')
+          <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
       </div>
 
       @csrf
@@ -64,30 +89,22 @@
   @endcomponent
 
 
-  @component('components.block', ['about' => 'Form Result'])
-    @isset($name)
+  @if($validated)
+    @component('components.block', ['about' => 'Form Result'])
       <p>Hi, {{ $name }}.</p>
-    @endisset
 
-    @if($checkbox)
-      <p>Checkbox's value ({{ $checkbox }}) was checked.</p>
-    @endif
+      <p>Checkbox's value(s) ({{ $checkbox }}) was checked.</p>
 
-    @if($radio)
       <p>Radiobutton's value was {{ $radio }}.</p>
-    @endif
-    
-    @if($select)
+      
       <p>Select's value was {{ $select }}.</p>
-    @endif
 
-    @if($file)
-      <label>Upload file infomation.</label>
+      <label>Uploaded file infomation.</label>
       <ul>
-        @foreach($file as $key => $value)
+        @foreach($upload as $key => $value)
           <li>{{ $key }}: <b>{{ $value }}</b></li>
         @endforeach
       </ul>
-    @endif
-  @endcomponent
+    @endcomponent
+  @endif
 @endsection

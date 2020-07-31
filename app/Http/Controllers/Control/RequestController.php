@@ -2,42 +2,50 @@
 
 namespace App\Http\Controllers\control;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Http\Requests\FormRequestExample;
+use App\Http\Controllers\Controller;
 
 class RequestController extends Controller
 {
     //
-    public function index(Request $req)
+    public function create(Request $req)
     {
-        if (!$req->hasFile('upload') || !$req->file('upload')->isValid())
-            $file = null;
-        else
-            $file = [
-                'getClientOriginalName' => $req->file('upload')->getClientOriginalName(),
-                'getClientOriginalExtension' => $req->file('upload')->getClientOriginalExtension(),
-                'getClientMimeType' => $req->file('upload')->getClientMimeType(),
-                'getSize' => $req->file('upload')->getSize(),
-            ];
-
-        $checkbox = $req->has('checkbox')
-            ? implode(',', $req->checkbox):
-            null;
-
         return view('control.request.index', [
-            'dump' => [
-                'root' => $req->root(),
-                'url' => $req->url(),
-                'fullUrl' => $req->fullUrl(),
-                'path' => $req->path(),
-                'ip' => $req->ip(),
-                'userAgent' => $req->userAgent(),
-            ],
-            'name' => $req->input('name', null),
-            'checkbox' => $checkbox,
-            'select' => $req->input('select', 0),
-            'radio' => $req->input('radio', 0),
-            'file' => $file,
+            'dump' => $this->_dump_request($req),
+            'validated' => false
         ]);
     }
+
+    public function post(FormRequestExample $req)
+    {
+        $post = $req->validated();
+
+        return view('control.request.index', [
+            'dump' => $this->_dump_request($req),
+            'validated' => true,
+            'name' => $post['name'],
+            'checkbox' => implode(',', $post['checkbox']),
+            'radio' => $post['radio'],
+            'select' => $post['select'],
+            'upload' => [
+                'getClientOriginalName' => $post['upload']->getClientOriginalName(),
+                'getClientOriginalExtension' => $post['upload']->getClientOriginalExtension(),
+                'getClientMimeType' => $post['upload']->getClientMimeType(),
+                'getSize' => $post['upload']->getSize(),
+            ],
+        ]);
+    }
+
+    private function _dump_request($req)
+    {
+        return [
+            'root' => $req->root(),
+            'url' => $req->url(),
+            'fullUrl' => $req->fullUrl(),
+            'path' => $req->path(),
+            'ip' => $req->ip(),
+            'userAgent' => $req->userAgent(),
+        ];
+    }    
 }
