@@ -87,4 +87,11 @@ class EloquentController extends Controller
             ],
         ]);
     }
+
+    public function relation()
+    {
+        return view('eloquent.relation', [
+            'relation' => [Book::find(1)]
+        ]);
+    }
 }

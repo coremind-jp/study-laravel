@@ -1,5 +1,5 @@
 @extends('layouts.base')
-@section('title', 'Eloquent Example')
+@section('title', 'Eloquent(Query) Example')
 
 @section('main')
 

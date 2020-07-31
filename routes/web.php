@@ -86,6 +86,7 @@ Route::prefix('study')->group(function() {
 
     Route::prefix('eloquent')->group(function() {
         Route::get('/', 'EloquentController@index');
+        Route::get('/relation', 'EloquentController@relation');
     });
 
 

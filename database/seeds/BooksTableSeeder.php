@@ -13,8 +13,7 @@ class BooksTableSeeder extends Seeder
     public function run()
     {
         //
-        DB::insert('insert into books
-        (isbn, title, price, publisher, published)
+        DB::insert('insert into books (isbn, title, price, publisher, published)
         values
         ("978-4-8222-5399-8","Visual C# 2019超入門",2000,"日経BP","2019-08-22"),
         ("978-4-7980-5759-0","はじめてのAndroidアプリ開発",3200,"秀和システム","2019-08-10"),
