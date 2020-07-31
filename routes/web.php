@@ -84,6 +84,11 @@ Route::prefix('study')->group(function() {
     });
 
 
+    Route::prefix('eloquent')->group(function() {
+        Route::get('/', 'EloquentController@index');
+    });
+
+
     Route::fallback(function() {
         return view('routes.fallback', ['from' => 'study']);
     });
