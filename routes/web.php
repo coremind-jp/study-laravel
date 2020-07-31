@@ -19,13 +19,13 @@ Route::get('/', function () {
 });
 
 Route::prefix('study')->group(function() {
-
     Route::get('/', 'StudyController@index');
+
 
     Route::get('directive', 'StudyController@directive');
 
-    Route::prefix('routes')->group(function() {
 
+    Route::prefix('routes')->group(function() {
         Route::get(
             'parameters/{require}/{option?}/{regexp?}/{global_regexp?}/{variable?}',
             'RoutesController@parameters'
@@ -33,32 +33,24 @@ Route::prefix('study')->group(function() {
             'regexp' => 'A[0-9]{3,5}',
             'variable' => '.*',
         ]);
-
         Route::namespace('Biglogic')->group(function () {
-
             Route::get('feature_a/logic', 'FeatureAController@logic');
-
             Route::get('feature_b/logic', 'FeatureBController@logic');
         });
-
         Route::view('pass_action', 'routes.pass_action', ['param' => 'Laravel']);
-
-        Route::redirect('request_redirect', 'redirect', 301);
-
-        Route::view('redirect', 'routes.redirect');
+        Route::redirect('request_redirect', 'redirected', 301);
+        Route::view('redirected', 'routes.redirected');
 
         Route::fallback(function() {
             return view('routes.fallback', ['from' => 'routes']);
         });
     });
 
+
     Route::prefix('control')->group(function() {
     Route::namespace('Control')->group(function () {
-
         Route::prefix('response')->group(function() {
-
             Route::view('/', 'control.response.index');
-
             Route::get('plain', 'ResponseController@plain');
             Route::get('json', 'ResponseController@json');
             Route::get('download', 'ResponseController@download');
@@ -68,18 +60,26 @@ Route::prefix('study')->group(function() {
                 ->name('redirect');
         });
 
-        Route::prefix('request')->group(function() {
 
+        Route::prefix('request')->group(function() {
             Route::match(['get', 'post'], '/', 'RequestController@index');
         });
     });
     });
 
-    Route::prefix('middleware')->group(function() {
 
+    Route::prefix('middleware')->group(function() {
         Route::get('log', 'MiddlewareController@log')
             ->middleware(LogMiddleware::class);
     });
+
+
+    Route::prefix('stateful')->group(function() {
+        Route::get('write/{type?}', 'StatefulController@write');
+        Route::get('cookie', 'StatefulController@cookie')
+            ->name('cookie');
+    });
+
 
     Route::fallback(function() {
         return view('routes.fallback', ['from' => 'study']);
