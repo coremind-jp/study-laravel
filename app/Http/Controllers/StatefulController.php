@@ -8,20 +8,44 @@ use Illuminate\Support\Facades\Cookie;
 class StatefulController extends Controller
 {
     //
+    public function index(Request $req)
+    {
+        return view('stateful.index', [
+            'encrypt' => $req->cookie('encrypt'),
+            'plain' => $req->cookie('plain'),
+            'session_value' => session('value', null),
+        ]);
+    }
+
     public function write_cookie($type = 'encrypt')
     {
         $type == 'encrypt'
             ? Cookie::queue('encrypt', date('Y-m-d H:i:s'), 60 * 24 * 30)
             : Cookie::queue('plain', date('Y-m-d H:i:s'), 60 * 24 * 30);
 
-        return redirect()->route('cookie');
+        return redirect()->route('stateful_index');
     }
 
-    public function cookie(Request $req)
+    public function clear_cookie($type)
     {
-        return view('stateful.cookie', [
-            'encrypt' => $req->cookie('encrypt'),
-            'plain' => $req->cookie('plain'),
-        ]);
+        $type == 'encrypt'
+            ? Cookie::queue(Cookie::forget('encrypt'))
+            : Cookie::queue(Cookie::forget('plain'));
+
+        return redirect()->route('stateful_index');
     }
+
+    public function write_session()
+    {
+        session()->put('value', date('Y-m-d H:i:s'));
+
+        return redirect()->route('stateful_index');
+    }
+
+    public function clear_session()
+    {
+        session()->forget('value');
+        
+        return redirect()->route('stateful_index');
+    }    
 }
