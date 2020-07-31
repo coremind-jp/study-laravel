@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cookie;
 class StatefulController extends Controller
 {
     //
-    public function write($type = 'encrypt')
+    public function write_cookie($type = 'encrypt')
     {
         $type == 'encrypt'
             ? Cookie::queue('encrypt', date('Y-m-d H:i:s'), 60 * 24 * 30)

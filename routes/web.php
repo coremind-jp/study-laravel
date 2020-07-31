@@ -75,7 +75,7 @@ Route::prefix('study')->group(function() {
 
 
     Route::prefix('stateful')->group(function() {
-        Route::get('write/{type?}', 'StatefulController@write');
+        Route::get('write_cookie/{type?}', 'StatefulController@write_cookie');
         Route::get('cookie', 'StatefulController@cookie')
             ->name('cookie');
     });

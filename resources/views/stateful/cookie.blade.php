@@ -7,7 +7,7 @@
     @isset($encrypt)
         <p>保存されている値: <b>{{ $encrypt }}</b></p>
     @else
-        <p><a href="./write/encrypt">実行時刻を書き込む。</a></p>
+        <p><a href="./write_cookie/encrypt">実行時刻を書き込む。</a></p>
     @endisset
   @endcomponent
 
@@ -15,7 +15,7 @@
     @isset($plain)
         <p>保存されている値: <b>{{ $plain }}</b></p>
     @else
-        <p><a href="./write/plain">実行時刻を書き込む。</a></p>
+        <p><a href="./write_cookie/plain">実行時刻を書き込む。</a></p>
     @endisset
   @endcomponent
 
