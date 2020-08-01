@@ -86,7 +86,11 @@ Route::prefix('study')->group(function() {
 
     Route::prefix('eloquent')->group(function() {
         Route::get('/', 'EloquentController@index');
-        Route::get('/relation', 'EloquentController@relation');
+        Route::get('relation', 'EloquentController@relation');
+        Route::get('books/{id?}', 'EloquentController@books')->name('books');
+        Route::post('books', 'EloquentController@post');
+        Route::patch('books/{id}', 'EloquentController@patch');
+        Route::delete('books/{id}', 'EloquentController@delete');
     });
 
 
