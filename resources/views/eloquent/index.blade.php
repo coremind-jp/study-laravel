@@ -2,29 +2,23 @@
 @section('title', 'Eloquent(Query) Example')
 
 @section('main')
-
   @component('components.block', ['about' => 'Table::all'])
     <code>Book::all()</code>
-    <table class="table table-striped">
-      <tr>
-        <th>書名</th>
-        <th>価格</th>
-        <th>出版社</th>
-        <th>刊行日</th>
-      </tr>
-      @each('subviews.book', $all, 'record', 'subviews.book_empty')
-    </table>
+    @component('components.book', ['records' => $all])@endcomponent
   @endcomponent
+
 
   @component('components.block', ['about' => 'Table::find'])
     <code>Book::find(1)->title</code>
     <p>{{ $find }}</p>
   @endcomponent
 
+
   @component('components.block', ['about' => 'Aggregate'])
     <code>Book::where('publisher', '翔泳社')->max('price')</code>
     <p>{{ $max }}</p>
   @endcomponent
+
 
   @component('components.block', ['about' => 'Table::select'])
     <code>Book::select('title', 'publisher')->get()</code>
@@ -42,36 +36,23 @@
     </table>
   @endcomponent
 
+
   @component('components.block', ['about' => 'Table::where'])
     @foreach($where as $where_example)
       <code>{{ $where_example['query'] }}</code>
-      <table class="table table-striped">
-        <tr>
-          <th>書名</th>
-          <th>価格</th>
-          <th>出版社</th>
-          <th>刊行日</th>
-        </tr>
-        @each('subviews.book', $where_example['records'], 'record', 'subviews.book_empty')
-      </table>
+      @component('components.book', ['records' => $where_example['records']])@endcomponent
     @endforeach
   @endcomponent
+
 
   @component('components.block', ['about' => 'Table::orderBy'])
     @foreach($orderby as $orderby_example)
       <code>{{ $orderby_example['query'] }}</code>
-      <table class="table table-striped">
-        <tr>
-          <th>書名</th>
-          <th>価格</th>
-          <th>出版社</th>
-          <th>刊行日</th>
-        </tr>
-        @each('subviews.book', $orderby_example['records'], 'record', 'subviews.book_empty')
-      </table>
+      @component('components.book', ['records' => $orderby_example['records']])@endcomponent
     @endforeach
   @endcomponent
   
+
   @component('components.block', ['about' => 'Table::groupBy'])
     <code>Book::groupBy('publisher')->selectRaw('publisher, AVG(price) AS price_avg')->get()</code>
     <table class="table table-striped">
@@ -86,7 +67,7 @@
         </tr>
       @endforeach
     </table>
-
+    
     <code>Book::groupBy('publisher')->having('price_avg', '<', 2500)->selectRaw('publisher, AVG(price) AS price_avg')->get()</code>
     <table class="table table-striped">
       <tr>
@@ -100,8 +81,5 @@
         </tr>
       @endforeach
     </table>
-    
   @endcomponent
-
-  
 @endsection
