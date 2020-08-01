@@ -1,4 +1,5 @@
 <tr>
+  <td>{{ $record->isbn }}</td>
   <td>{{ $record->title }}</td>
   <td>{{ $record->price }}</td>
   <td>{{ $record->publisher }}</td>
