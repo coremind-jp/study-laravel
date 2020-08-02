@@ -47,5 +47,5 @@ class StatefulController extends Controller
         session()->forget('value');
         
         return redirect()->route('stateful_index');
-    }    
+    }
 }

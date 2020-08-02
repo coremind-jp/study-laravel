@@ -35,7 +35,8 @@ class ResponseController extends Controller
     public function download()
     {
         return response()
-            ->streamDownload(function() {
+            ->streamDownload(
+                function () {
                     print('hello, world!');
                 },
                 'MessageForYou.txt',
@@ -67,7 +68,6 @@ class ResponseController extends Controller
             default:
                 return redirect('/study');
         }
-        
     }
 
     public function redirect(Request $req)

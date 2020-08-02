@@ -37,7 +37,7 @@ class EloquentController extends Controller
             'where' => [
                 [
                     'query'   => "Book::where('publisher', '翔泳社')->get()",
-                    'records' =>  Book::where('publisher', '翔泳社')->get(),    
+                    'records' =>  Book::where('publisher', '翔泳社')->get(),
                 ],
                 [
                     'query'   => "Book::where('publisher', '翔泳社')->first()",
@@ -106,7 +106,7 @@ class EloquentController extends Controller
 
     public function books($id = null)
     {
-        return $id 
+        return $id
             ? view('eloquent.form', [
                 'action' => '/study/eloquent/books/'.$id,
                 'method' => 'PATCH',

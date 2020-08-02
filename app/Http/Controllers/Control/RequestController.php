@@ -47,5 +47,5 @@ class RequestController extends Controller
             'ip' => $req->ip(),
             'userAgent' => $req->userAgent(),
         ];
-    }    
+    }
 }

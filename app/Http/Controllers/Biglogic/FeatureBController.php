@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class FeatureBController extends Controller
 {
     //
-    function logic()
+    public function logic()
     {
         return view('biglogic.feature_b.logic');
     }

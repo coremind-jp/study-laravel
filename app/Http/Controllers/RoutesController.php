@@ -12,8 +12,8 @@ class RoutesController extends Controller
         string $option = 'empty',
         string $regexp = "empty",
         string $global_regexp = "empty",
-        string $variable = "empty")
-    {
+        string $variable = "empty"
+    ) {
         return view('routes.parameters', [
             'params' => [
                 'require' => $require,

@@ -45,6 +45,6 @@ class StoreBook extends FormRequest
             'publisher.string' => '文字列として認識できませんでした',
             'published.required' => '刊行日を入力してください',
             'published.date' => '日付として認識できませんでした',
-        ];            
+        ];
     }
 }
