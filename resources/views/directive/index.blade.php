@@ -48,12 +48,13 @@
   @component('components.block', ['about' => '@each'])
     <table class="table table-striped">
       <tr>
+        <th>ISBN</th>
         <th>書名</th>
         <th>価格</th>
         <th>出版社</th>
         <th>刊行日</th>
       </tr>
-      @each('subviews.book', $foreach, 'record', 'subviews.book_empty')
+      @each('components.book.item', $foreach, 'record', 'components.book.book_empty')
     </table>
   @endcomponent
 

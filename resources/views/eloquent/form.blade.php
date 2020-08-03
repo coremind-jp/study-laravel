@@ -40,7 +40,7 @@
       </div>
 
       <div class="form-group">
-        <input class="form-control" name="published" value="{{ old('published', $old['published']) }}" placeholder="刊行日"">
+        <input class="form-control" name="published" value="{{ old('published', $old['published']) }}" placeholder="刊行日">
         
         @error('published')
           <small class="form-text text-danger">{{ $message }}</small>

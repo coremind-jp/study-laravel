@@ -5,15 +5,9 @@ namespace App\Http\Controllers;
 use App\Book;
 use Illuminate\Http\Request;
 
-class StudyController extends Controller
+class DirectiveController extends Controller
 {
-    //
     public function index()
-    {
-        return 'こんにちは、世界！';
-    }
-
-    public function directive()
     {
         $data = [
             'img' => '<img src="https://avatars1.githubusercontent.com/u/1571522?s=400&v=4" width="200" title="ロゴ"/>',
@@ -30,6 +24,6 @@ class StudyController extends Controller
             'weeks' => ['月', '火', '水', '木', '金', '土', '日'],
         ];
 
-        return view('study.directive', $data);
+        return view('directive.index', $data);
     }
 }
