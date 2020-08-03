@@ -42,6 +42,9 @@ Route::prefix('study')->group(function () {
 
 
     Route::prefix('routes')->group(function () {
+        Route::view('view', 'routes.view', ['param' => 'Laravel']);
+
+
         Route::get(
             'parameters/{require}/{option?}/{regexp?}/{global_regexp?}/{variable?}',
             'RoutesController@parameters'
@@ -49,18 +52,25 @@ Route::prefix('study')->group(function () {
             'regexp' => 'A[0-9]{3,5}',
             'variable' => '.*',
         ]);
-        Route::namespace('Biglogic')->group(function () {
-            Route::get('feature_a/logic', 'FeatureAController@logic');
-            Route::get('feature_b/logic', 'FeatureBController@logic');
-        });
+
+
         Route::prefix('redirect')->group(function () {
             Route::redirect('from', 'routes.redirect.to', 301);
             Route::view('to', 'routes.redirect.to');
         });
+
+
         Route::prefix('resource')->group(function () {
             Route::resource('books', 'ResourceController');
         });
-        Route::view('view', 'routes.view', ['param' => 'Laravel']);
+
+
+        Route::namespace('Biglogic')->group(function () {
+            Route::get('feature_a/logic', 'FeatureAController@logic');
+            Route::get('feature_b/logic', 'FeatureBController@logic');
+        });
+
+
         Route::fallback(function () {
             return view('routes.fallback', ['from' => 'routes']);
         });
@@ -97,6 +107,7 @@ Route::prefix('study')->group(function () {
         Route::get('clear_cookie/{type?}', 'StatefulController@clear_cookie');
         Route::get('write_session', 'StatefulController@write_session');
         Route::get('clear_session', 'StatefulController@clear_session');
+        Route::get('flash', 'StatefulController@flash');
     });
 
 

@@ -48,4 +48,19 @@ class StatefulController extends Controller
         
         return redirect()->route('stateful_index');
     }
+
+    public function flash(Request $req)
+    {
+        switch ($req->session) {
+            case "flash":
+                $req->session()->flash('flash_confirmn', true);
+                break;
+
+            case "reflash":
+                $req->session()->reflash();
+                break;
+        }
+        
+        return view('stateful.confirmn');
+    }
 }
