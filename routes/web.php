@@ -121,6 +121,14 @@ Route::prefix('study')->group(function () {
     });
 
 
+    Route::prefix('custom_validation')->group(function () {
+        Route::get('/', 'CustomValidationController@index');
+        Route::post('rule', 'CustomValidationController@rule');
+        Route::post('extend', 'CustomValidationController@extend');
+        Route::post('closure', 'CustomValidationController@closure');
+    });
+
+
     Route::fallback(function () {
         return view('routes.fallback', ['from' => 'study']);
     });

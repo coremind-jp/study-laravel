@@ -117,6 +117,9 @@ return [
     'url'                  => ':attributeに正しい形式を指定してください。',
     'uuid'                 => ':attributeに有効なUUIDを指定してください。',
 
+
+    'as_extend'            => ':attribute は "extend" 以外の入力値を許可しません。',
+
     /*
     |--------------------------------------------------------------------------
     | Custom バリデーション言語行
@@ -129,9 +132,8 @@ return [
     */
 
     'custom' => [
-        '属性名' => [
-            'ルール名' => 'カスタムメッセージ',
-        ],
+        'as_rule'    => ':attribute は "rule" 以外の入力値を許可しません。',
+        'as_closure' => ':attribute は "closure" 以外の入力値を許可しません。',
     ],
 
     /*
@@ -145,6 +147,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'form_rule'    => '[rule] フォーム値',
+        'form_closure' => '[closure] フォーム値',
+        'form_extend'  => '[extend] フォーム値',
+    ],
 
 ];
