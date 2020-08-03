@@ -13,7 +13,7 @@
 
 
   @component('components.block', ['about' => 'Form'])
-    <form method="POST" action="/study/control/request/" enctype="multipart/form-data">
+    <form method="POST" action="{{ action('Control\\RequestController@post') }}" enctype="multipart/form-data">
       <div class="form-group">
         <label>Text</label>
 
