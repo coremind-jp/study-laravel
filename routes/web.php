@@ -57,6 +57,9 @@ Route::prefix('study')->group(function () {
             Route::redirect('from', 'routes.redirect.to', 301);
             Route::view('to', 'routes.redirect.to');
         });
+        Route::prefix('resource')->group(function () {
+            Route::resource('books', 'ResourceController');
+        });
         Route::view('view', 'routes.view', ['param' => 'Laravel']);
         Route::fallback(function () {
             return view('routes.fallback', ['from' => 'routes']);
