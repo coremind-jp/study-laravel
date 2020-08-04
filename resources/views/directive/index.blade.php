@@ -45,7 +45,7 @@
 
   @component('components.block', ['about' => 'anonymouse component'])
     <x-anonymouse-component sample-prop="i'm anonymouse component.">
-      inline-component と同様に単一ファイルでコンポ―ネントを管理する手段として匿名コンポ―ネントとして定義できます。<br>
+      inline-component と同様に単一ファイルでコンポ―ネントを管理する手段として匿名コンポ―ネントも用意されています。<br>
     </x-anonymouse-component>
   @endcomponent
 
