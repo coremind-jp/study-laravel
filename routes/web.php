@@ -141,10 +141,7 @@ Route::prefix('study')->group(function () {
         Route::middleware('auth')->group(function () {
             Route::get('home', 'AuthController@home');
             Route::get('profile', 'AuthController@profile');
-
-            // Route::view('pay_confirm', 'auth_scratch.pay_confirm')
             Route::get('pay', 'AuthController@pay')->middleware('password.confirm');
-            Route::post('pay', 'AuthController@pay')->middleware('password.confirm');
         });
     });
 
