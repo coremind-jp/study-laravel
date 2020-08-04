@@ -119,6 +119,7 @@ return [
 
 
     'as_extend'            => ':attribute は "extend" 以外の入力値を許可しません。',
+    'password'             => ':attribute が正しくありません。',
 
     /*
     |--------------------------------------------------------------------------
@@ -132,8 +133,8 @@ return [
     */
 
     'custom' => [
-        'as_rule'    => ':attribute は "rule" 以外の入力値を許可しません。',
-        'as_closure' => ':attribute は "closure" 以外の入力値を許可しません。',
+        'as_rule'       => ':attribute は "rule" 以外の入力値を許可しません。',
+        'as_closure'    => ':attribute は "closure" 以外の入力値を許可しません。',
     ],
 
     /*
@@ -148,6 +149,9 @@ return [
     */
 
     'attributes' => [
+        'name'         => '名前',
+        'email'        => 'メールアドレス',
+        'password'     => 'パスワード',
         'form_rule'    => '[rule] フォーム値',
         'form_closure' => '[closure] フォーム値',
         'form_extend'  => '[extend] フォーム値',

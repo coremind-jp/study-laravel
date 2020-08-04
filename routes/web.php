@@ -16,13 +16,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LogMiddleware;
 use App\Review;
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::view('/', 'welcome');
 
 Route::prefix('study')->group(function () {
     Route::get('/', function () {
@@ -126,6 +122,27 @@ Route::prefix('study')->group(function () {
         Route::post('rule', 'CustomValidationController@rule');
         Route::post('extend', 'CustomValidationController@extend');
         Route::post('closure', 'CustomValidationController@closure');
+    });
+
+
+    Route::prefix('auth')->group(function () {
+        Route::namespace('Auth')->group(function () {
+            Route::get('login', 'LoginController@showLoginForm')->name('login');
+            Route::post('login', 'LoginController@login');
+            Route::get('logout', 'LoginController@logout');
+
+            Route::get('confirm', 'ConfirmPasswordController@showConfirmForm')->name('password.confirm');
+            Route::post('confirm', 'ConfirmPasswordController@confirm');
+        });
+
+        Route::middleware('auth')->group(function () {
+            Route::get('home', 'AuthController@home');
+            Route::get('profile', 'AuthController@profile');
+
+            // Route::view('pay_confirm', 'auth_scratch.pay_confirm')
+            Route::get('pay', 'AuthController@pay')->middleware('password.confirm');
+            Route::post('pay', 'AuthController@pay')->middleware('password.confirm');
+        });
     });
 
 
