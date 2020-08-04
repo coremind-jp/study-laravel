@@ -3,9 +3,18 @@
 @section('title', 'Login Example')
 
 @section('main')
-  <x-block about="ログイン認証">
-    <form method="POST" action="{{ action('Auth\LoginController@login') }}">
+  <x-block about="ユーザー登録">
+    <form method="POST" action="{{ action('Auth\RegisterController@register') }}">
       @csrf
+
+      <div class="form-group">
+        <input class="form-control" type="name" name="name" value="{{ old('name') }}" placeholder="名前">
+        
+        @error('name')
+          <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
+      </div>
+
       <div class="form-group">
         <input class="form-control" type="email" name="email" value="{{ old('email') }}" placeholder="メールアドレス">
         
@@ -22,21 +31,11 @@
         @enderror
       </div>
 
-      <div class="form-group form-check">
-        <input class="form-check-input" type="checkbox" name="remenber"
-          @if(old('remenber', ''))) checked @endif
-        >
-        <label class="form-check-label">ログイン状態を保存する</label>
+      <div class="form-group">
+        <input class="form-control" type="password" name="password_confirmation" value="{{ old('password_confirmation') }}" placeholder="パスワード確認">
       </div>
 
-      @error('authenticate')
-        <div class="form-group">
-          <small class="form-text text-danger">{{ $message }}</small>
-        </div>
-      @enderror
-
-      <button type="submit" class="btn btn-primary">ログイン</button>
+      <button type="submit" class="btn btn-primary">登録</button>
     </form>
-    <a class="btn btn-primary" href="{{ action('Auth\RegisterController@showRegistrationForm') }} ">新規登録</a>
   </x-block>
 @endsection

@@ -127,6 +127,9 @@ Route::prefix('study')->group(function () {
 
     Route::prefix('auth')->group(function () {
         Route::namespace('Auth')->group(function () {
+            Route::get('registration', 'RegisterController@showRegistrationForm');
+            Route::post('registration', 'RegisterController@register');
+
             Route::get('login', 'LoginController@showLoginForm')->name('login');
             Route::post('login', 'LoginController@login');
             Route::get('logout', 'LoginController@logout');
