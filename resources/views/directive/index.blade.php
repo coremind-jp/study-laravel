@@ -36,6 +36,20 @@
   @endcomponent
 
 
+  @component('components.block', ['about' => 'inline component'])
+    <x-inline-component sample-prop="i'm inline component.">
+      Componentクラスを継承してコンポーネントを作成することで内部の煩雑な処理を隠蔽することができます。<br>
+    </x-inline-component>
+  @endcomponent
+
+
+  @component('components.block', ['about' => 'anonymouse component'])
+    <x-anonymouse-component sample-prop="i'm anonymouse component.">
+      inline-component と同様に単一ファイルでコンポ―ネントを管理する手段として匿名コンポ―ネントとして定義できます。<br>
+    </x-anonymouse-component>
+  @endcomponent
+
+
   @component('components.block', ['about' => '@include'])
     @include('subviews.alert', [
       'type' => 'warning',

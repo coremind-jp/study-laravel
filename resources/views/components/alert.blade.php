@@ -3,6 +3,8 @@
     {{ $alert_title }}
   </h4>
 
+  <p>blade構文上では @@component ディレクティブを使わずにカスタムタグとして呼び出す事もできます。</p>
+
   <p>{{ $slot }}</p>
   
   @isset($isset)

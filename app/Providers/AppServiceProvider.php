@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
 
@@ -25,6 +26,13 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         //
+        $this->registerCustomValidation();
+        
+        $this->registerComponents();
+    }
+
+    protected function registerCustomValidation()
+    {
         Validator::extend('as_extend', function (
             $attribute,
             $value,
@@ -33,5 +41,17 @@ class AppServiceProvider extends ServiceProvider
         ) {
             return $value === 'extend';
         });
+    }
+
+    protected function registerComponents()
+    {
+        $list = [
+            'header' => App\View\Components\Header::class,
+            'inline-component' => App\View\Components\InlineComponent::class,
+        ];
+        
+        foreach ($list as $name => $component) {
+            Blade::component('components.'.$name, $component);
+        }
     }
 }
