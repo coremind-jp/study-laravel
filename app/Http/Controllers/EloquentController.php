@@ -2,20 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Book;
-use App\Http\Requests\StoreBook;
 
 class EloquentController extends Controller
 {
-    const OLD_FALLBACK = [
-        'isbn'=> "",
-        'title'=> "",
-        'price'=> "",
-        'publisher'=> "",
-        'published'=> "",
-    ];
-
     //
     public function index()
     {
@@ -95,54 +85,5 @@ class EloquentController extends Controller
                 ],
             ],
         ]);
-    }
-
-    public function relation()
-    {
-        return view('eloquent.relation', [
-            'relation' => [Book::find(1)]
-        ]);
-    }
-
-    public function books($id = null)
-    {
-        return $id
-            ? view('eloquent.form', [
-                'action' => '/study/eloquent/books/'.$id,
-                'method' => 'PATCH',
-                'old' => Book::findOrFail($id),
-                'history' => Book::orderBy('updated_at', 'desc')->limit(5)->get(),
-             ])
-            : view('eloquent.form', [
-                'action' => '/study/eloquent/books',
-                'method' => 'POST',
-                'old' => EloquentController::OLD_FALLBACK,
-                'history' => Book::orderBy('updated_at', 'desc')->limit(5)->get(),
-             ]);
-    }
-
-    public function post(StoreBook $req)
-    {
-        (new Book())
-            ->fill($req->validated())
-            ->save();
-
-        return redirect()->route('books');
-    }
-
-    public function patch(StoreBook $req, $id)
-    {
-        (Book::find($id))
-            ->fill($req->validated())
-            ->save();
-
-        return redirect()->route('books');
-    }
-
-    public function delete($id)
-    {
-        Book::find($id)->delete();
-
-        return redirect()->route('books');
     }
 }
