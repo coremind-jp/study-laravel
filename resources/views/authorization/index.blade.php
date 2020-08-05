@@ -18,7 +18,7 @@
           <small class="text-info">：実行可能</small>
         @endcan
         @cannot('admin-only', Users::class)
-          <small class="text-danger">：権限がありません。</small>
+          <small class="text-danger">：権限がないため実行できません。</small>
         @endcannot
       </li>
 
@@ -28,7 +28,7 @@
           <small class="text-info">：実行可能</small>
         @endcan
         @cannot('chief-higher', Users::class)
-          <small class="text-danger">：権限がありません。</small>
+          <small class="text-danger">：権限がないため実行できません。</small>
         @endcannot
       </li>
 
@@ -38,7 +38,7 @@
           <small class="text-info">：実行可能</small>
         @endcan
         @cannot('user-higher', Users::class)
-          <small class="text-danger">：権限がありません。</small>
+          <small class="text-danger">：権限がないため実行できません。</small>
         @endcannot
       </li>
     </ul>
