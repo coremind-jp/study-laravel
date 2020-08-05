@@ -146,6 +146,14 @@ Route::prefix('study')->group(function () {
     });
 
 
+    Route::prefix('authorization')->group(function () {
+        Route::get('/', 'AuthorizationController@index');
+        Route::get('admin', 'AuthorizationController@doSomthingAsAdmin');
+        Route::get('chief', 'AuthorizationController@doSomthingAsChief');
+        Route::get('user', 'AuthorizationController@doSomthingAsUser');
+    });
+
+
     Route::fallback(function () {
         return view('routes.fallback', ['from' => 'study']);
     });

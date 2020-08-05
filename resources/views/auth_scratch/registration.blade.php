@@ -8,6 +8,19 @@
       @csrf
 
       <div class="form-group">
+        <select class="form-control" name="authority">
+          <option value="">権限</option>
+          @foreach($authorities as $authority)
+            <option @if($authority == old('authority')) selected @endif>{{ $authority }}</option>
+          @endforeach
+        </select>
+
+        @error('authority')
+          <small class="form-text text-danger">{{ $message }}</small>
+        @enderror
+      </div>
+
+      <div class="form-group">
         <input class="form-control" type="name" name="name" value="{{ old('name') }}" placeholder="名前">
         
         @error('name')

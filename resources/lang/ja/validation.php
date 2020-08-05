@@ -152,6 +152,7 @@ return [
         'name'         => '名前',
         'email'        => 'メールアドレス',
         'password'     => 'パスワード',
+        'authority'    => '権限',
         'form_rule'    => '[rule] フォーム値',
         'form_closure' => '[closure] フォーム値',
         'form_extend'  => '[extend] フォーム値',

@@ -25,6 +25,13 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        //
+        $this->registerGates();
+    }
+
+    public function registerGates()
+    {
+        Gate::define('admin-only', 'App\Policies\GatePolicy@adminOnly');
+        Gate::define('chief-higher', 'App\Policies\GatePolicy@chiefHigher');
+        Gate::define('user-higher', 'App\Policies\GatePolicy@userHigher');
     }
 }
