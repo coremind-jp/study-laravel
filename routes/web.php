@@ -16,10 +16,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\LogMiddleware;
 use App\Review;
 
-// Auth::routes();
-
-// Route::view('/', 'welcome');
-
 Route::prefix('study')->group(function () {
     Route::get('/', function () {
         return 'こんにちわ、世界！';
@@ -132,9 +128,13 @@ Route::prefix('study')->group(function () {
 
             Route::get('confirm', 'ConfirmPasswordController@showConfirmForm')->name('password.confirm');
             Route::post('confirm', 'ConfirmPasswordController@confirm');
+
+            Route::get('verify', 'VerificationController@show')->name('verification.notice');
+            Route::get('verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
+            Route::post('email/resend', 'VerificationController@resend')->name('verification.resend');
         });
 
-        Route::middleware('auth')->group(function () {
+        Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('home', 'AuthController@home');
             Route::get('profile', 'AuthController@profile');
             Route::get('pay', 'AuthController@pay')->middleware('password.confirm');
