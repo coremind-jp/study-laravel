@@ -3,19 +3,22 @@
 @section('title', 'Login Example')
 
 @section('main')
-  <x-block about="確認メール送信">
+  <x-block about="認証確認メール送信">
     @if (session('resent'))
     <div class="alert alert-success" role="alert">
-        {{ __('A fresh verification link has been sent to your email address.') }}
+        登録したメールアドレス宛に確認メールを送信しました。
     </div>
+    @else
+      <p>続行する前に、メールに記載された確認リンクで認証を済ませる必要があります。</p>
+
+      メールが届かない場合は、
+      <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
+          @csrf
+          <button type="submit" class="btn btn-link p-0 m-0 align-baseline">
+            こちら
+          </button>
+      </form>
+      からメールの再送ができます。
     @endif
-
-    {{ __('Before proceeding, please check your email for a verification link.') }}
-    {{ __('If you did not receive the email') }},
-    <form class="d-inline" method="POST" action="{{ route('verification.resend') }}">
-        @csrf
-        <button type="submit" class="btn btn-link p-0 m-0 align-baseline">{{ __('click here to request another') }}</button>.
-    </form>
-
   </x-block>
 @endsection
