@@ -110,10 +110,6 @@ Route::prefix('study')->group(function () {
     Route::prefix('eloquent')->group(function () {
         Route::get('/', 'EloquentController@index');
         Route::get('relation', 'EloquentController@relation');
-        Route::get('books/{id?}', 'EloquentController@books')->name('books');
-        Route::post('books', 'EloquentController@post');
-        Route::patch('books/{id}', 'EloquentController@patch');
-        Route::delete('books/{id}', 'EloquentController@delete');
     });
 
 
@@ -142,6 +138,12 @@ Route::prefix('study')->group(function () {
             Route::get('home', 'AuthController@home');
             Route::get('profile', 'AuthController@profile');
             Route::get('pay', 'AuthController@pay')->middleware('password.confirm');
+
+            Route::get('books/{book?}', 'PolicyController@show')->name('books');
+            Route::post('books', 'PolicyController@post');
+            Route::delete('books/{book}', 'PolicyController@delete');
+            Route::patch('books/{book}', 'PolicyController@patch')
+                ->middleware('can:update,book');
         });
     });
 
