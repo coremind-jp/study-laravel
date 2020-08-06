@@ -118,21 +118,7 @@ Route::prefix('study')->group(function () {
 
 
     Route::prefix('auth')->group(function () {
-        Route::namespace('Auth')->group(function () {
-            Route::get('registration', 'RegisterController@showRegistrationForm');
-            Route::post('registration', 'RegisterController@register');
-
-            Route::get('login', 'LoginController@showLoginForm')->name('login');
-            Route::post('login', 'LoginController@login');
-            Route::get('logout', 'LoginController@logout');
-
-            Route::get('confirm', 'ConfirmPasswordController@showConfirmForm')->name('password.confirm');
-            Route::post('confirm', 'ConfirmPasswordController@confirm');
-
-            Route::get('verify', 'VerificationController@show')->name('verification.notice');
-            Route::get('verify/{id}/{hash}', 'VerificationController@verify')->name('verification.verify');
-            Route::post('email/resend', 'VerificationController@resend')->name('verification.resend');
-        });
+        Auth::routes(['verify' => true]);
 
         Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('home', 'AuthController@home');

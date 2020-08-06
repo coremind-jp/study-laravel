@@ -16,6 +16,7 @@
 
       <div class="form-group">
         <input class="form-control" type="password" name="password" value="{{ old('password') }}" placeholder="パスワード">
+        <p><a href="{{ route('password.request') }}">パスワードを忘れた場合</a></p>
         
         @error('password')
           <small class="form-text text-danger">{{ $message }}</small>
