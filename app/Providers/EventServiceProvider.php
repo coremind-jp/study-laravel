@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Events\GlobalEvent;
+use App\Listeners\GlobalEventListener;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -18,6 +20,13 @@ class EventServiceProvider extends ServiceProvider
         Registered::class => [
             SendEmailVerificationNotification::class,
         ],
+        GlobalEvent::class => [
+            GlobalEventListener::class,
+        ],
+    ];
+
+    protected $subscribe = [
+        'App\Listeners\ScopedEventListener',
     ];
 
     /**

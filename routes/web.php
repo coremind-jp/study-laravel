@@ -141,6 +141,11 @@ Route::prefix('study')->group(function () {
         Route::get('user', 'AuthorizationController@doSomthingAsUser');
     });
 
+    Route::prefix('event')->group(function () {
+        Route::get('global', 'EventController@global');
+        Route::get('scoped', 'EventController@scoped');
+    });
+
 
     Route::fallback(function () {
         return view('routes.fallback', ['from' => 'study']);
