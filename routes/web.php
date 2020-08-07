@@ -124,6 +124,7 @@ Route::prefix('study')->group(function () {
             Route::get('home', 'AuthController@home');
             Route::get('profile', 'AuthController@profile');
             Route::get('pay', 'AuthController@pay')->middleware('password.confirm');
+            Route::get('api_token/update', 'AuthController@updateTokne');
 
             Route::get('books/{book?}', 'PolicyController@show')->name('books');
             Route::post('books', 'PolicyController@post');
@@ -140,6 +141,7 @@ Route::prefix('study')->group(function () {
         Route::get('chief', 'AuthorizationController@doSomthingAsChief');
         Route::get('user', 'AuthorizationController@doSomthingAsUser');
     });
+
 
     Route::prefix('event')->group(function () {
         Route::get('global', 'EventController@global');

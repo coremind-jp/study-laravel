@@ -10,6 +10,7 @@
       <li><a href="{{ action('AuthorizationController@index') }} ">ゲート認可</a></li>
       <li><a href="{{ route('books') }} ">ポリシー認可を利用したモデル操作</a></li>
       <li><a href="{{ action('AuthController@profile') }} ">プロフィール</a></li>
+      <li><a href="{{ action('AuthController@updateTokne') }} ">APIトークンの更新</a></li>
       <li><a href="{{ route('password.update') }} ">パスワードリセット</a></li>
     </ul>
     <form method="POST" action="{{ action('Auth\LoginController@logout') }}">
