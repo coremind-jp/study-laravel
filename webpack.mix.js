@@ -13,4 +13,5 @@ const mix = require('laravel-mix');
 mix.webpackConfig({ node: { fs: "empty" }, })
     .js('resources/js/app.js', 'public/js')
     .js('resources/js/public_broadcast.js', 'public/js')
+    .js('resources/js/private_broadcast.js', 'public/js')
     .sass('resources/sass/app.scss', 'public/css');

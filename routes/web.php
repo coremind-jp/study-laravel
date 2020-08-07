@@ -151,6 +151,8 @@ Route::prefix('study')->group(function () {
 
     Route::prefix('broadcast')->group(function () {
         Route::get('public', 'BroadcastController@public');
+        Route::get('private/{id?}', 'BroadcastController@private')
+            ->middleware(['auth', 'verified']);
     });
 
     Route::fallback(function () {

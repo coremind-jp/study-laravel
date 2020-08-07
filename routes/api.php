@@ -19,3 +19,12 @@ Route::prefix('study')->group(function () {
         Route::post('public/post', 'BroadcastController@postPublic');
     });
 });
+
+
+Route::middleware('auth:api')->group(function () {
+    Route::prefix('study')->group(function () {
+        Route::prefix('broadcast')->group(function () {
+            Route::post('private/post', 'BroadcastController@postPrivate');
+        });
+    });
+});

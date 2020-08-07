@@ -1,5 +1,6 @@
 {
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/js/private_broadcast.js": "/js/private_broadcast.js",
     "/js/public_broadcast.js": "/js/public_broadcast.js"
 }

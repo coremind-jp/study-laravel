@@ -17,6 +17,14 @@ class BroadcastController extends Controller
         return view('broadcast.public');
     }
 
+    public function private()
+    {
+        return view('broadcast.private', [
+            'id' => Auth::user()->id,
+            'token' => Auth::user()->api_token
+        ]);
+    }
+
     public function postPublic(Request $req)
     {
         Validator::make($req->all(), [
@@ -27,6 +35,20 @@ class BroadcastController extends Controller
         ])->validated();
 
         event(new PublicBroadcastEvent($req->message));
+
+        return "";
+    }
+
+    public function postPrivate(Request $req)
+    {
+        Validator::make($req->all(), [
+            'message' => [
+                'required',
+                'string'
+            ]
+        ])->validated();
+
+        broadcast(new PrivateBroadcastEvent(Auth::user(), $req->message));
 
         return "";
     }
