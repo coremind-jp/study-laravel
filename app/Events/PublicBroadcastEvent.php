@@ -71,6 +71,6 @@ class PublicBroadcastEvent implements ShouldBroadcast
      */
     public function broadcastOn()
     {
-        return new Channel('public');
+        return new Channel('broadcast.public');
     }
 }

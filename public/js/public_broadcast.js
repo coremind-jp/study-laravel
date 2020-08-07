@@ -86,31 +86,102 @@
 /************************************************************************/
 /******/ ({
 
+/***/ "./resources/js/echo_wrapper.js":
+/*!**************************************!*\
+  !*** ./resources/js/echo_wrapper.js ***!
+  \**************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && Symbol.iterator in Object(iter)) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+/* harmony default export */ __webpack_exports__["default"] = (function (_ref) {
+  var _ref2, _ref3, _ref4;
+
+  var api = _ref.api,
+      channel = _ref.channel,
+      event = _ref.event,
+      method = _ref.method,
+      auth = _ref.auth;
+  var debounceArgs = [200, {
+    leading: true,
+    trailing: false
+  }];
+  var status = false;
+
+  function updateJoinStatus(value) {
+    if (status === value) return;
+    status = value;
+
+    if (status) {
+      document.querySelector("#join").disabled = true;
+      document.querySelector("#message").readOnly = false;
+      document.querySelector("#leave").disabled = false;
+      document.querySelector("#submit").disabled = false;
+    } else {
+      document.querySelector("#join").disabled = false;
+      document.querySelector("#message").readOnly = true;
+      document.querySelector("#leave").disabled = true;
+      document.querySelector("#submit").disabled = true;
+    }
+  }
+
+  document.querySelector("#join").addEventListener("click", (_ref2 = _).debounce.apply(_ref2, _toConsumableArray([function (e) {
+    updateJoinStatus(true);
+    Echo[method](channel).listen(event, function (e) {
+      var child = document.createElement("i");
+      child.textContent = e.message;
+      child.className = "d-block";
+      document.querySelector("#recieved").appendChild(child);
+    });
+  }].concat(debounceArgs))));
+  document.querySelector("#leave").addEventListener("click", (_ref3 = _).debounce.apply(_ref3, _toConsumableArray([function (e) {
+    updateJoinStatus(false);
+    Echo.leave(channel);
+  }].concat(debounceArgs))));
+  document.querySelector("#submit").addEventListener("click", (_ref4 = _).debounce.apply(_ref4, _toConsumableArray([function (e) {
+    axios.post(api, {
+      message: document.querySelector("#message").value
+    }, auth).then(function (e) {
+      document.querySelector("#message").value = document.querySelector("#error").textContent = "";
+    })["catch"](function (e) {
+      document.querySelector("#error").textContent = e.message;
+    });
+  }].concat(debounceArgs))));
+});
+
+/***/ }),
+
 /***/ "./resources/js/public_broadcast.js":
 /*!******************************************!*\
   !*** ./resources/js/public_broadcast.js ***!
   \******************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-Echo.channel('public').listen('PublicBroadcastEvent', function (e) {
-  var child = document.createElement("i");
-  child.textContent = e.message;
-  child.className = "d-block";
-  document.querySelector("#recieved").appendChild(child);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _echo_wrapper_js__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./echo_wrapper.js */ "./resources/js/echo_wrapper.js");
+
+Object(_echo_wrapper_js__WEBPACK_IMPORTED_MODULE_0__["default"])({
+  api: "/api/study/broadcast/public/post",
+  channel: "broadcast.public",
+  event: "PublicBroadcastEvent",
+  method: "channel",
+  auth: {}
 });
-document.querySelector("#submit").addEventListener("click", _.debounce(function (e) {
-  axios.post("/api/study/broadcast/public/post", {
-    message: document.querySelector("#message").value
-  }).then(function (e) {
-    document.querySelector("#message").value = document.querySelector("#error").textContent = "";
-  })["catch"](function (e) {
-    document.querySelector("#error").textContent = e.message;
-  });
-}, 200, {
-  leading: true,
-  trailing: false
-}));
 
 /***/ }),
 

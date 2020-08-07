@@ -14,14 +14,21 @@ class BroadcastController extends Controller
     //
     public function public()
     {
-        return view('broadcast.public');
+        return view('broadcast.index', [
+            'id' => Auth::user()->id,
+            'token' => Auth::user()->api_token,
+            'access' => 'public',
+            'name'  => 'パブリック'
+        ]);
     }
 
     public function private()
     {
-        return view('broadcast.private', [
+        return view('broadcast.index', [
             'id' => Auth::user()->id,
-            'token' => Auth::user()->api_token
+            'token' => Auth::user()->api_token,
+            'access' => 'private',
+            'name'  => 'プライベート'
         ]);
     }
 
@@ -34,7 +41,7 @@ class BroadcastController extends Controller
             ]
         ])->validated();
 
-        event(new PublicBroadcastEvent($req->message));
+        broadcast(new PublicBroadcastEvent($req->message));
 
         return "";
     }
