@@ -149,6 +149,10 @@ Route::prefix('study')->group(function () {
     });
 
 
+    Route::prefix('broadcast')->group(function () {
+        Route::get('public', 'BroadcastController@public');
+    });
+
     Route::fallback(function () {
         return view('routes.fallback', ['from' => 'study']);
     });
