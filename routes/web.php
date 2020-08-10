@@ -125,6 +125,8 @@ Route::prefix('study')->group(function () {
             Route::get('profile', 'AuthController@profile');
             Route::get('pay', 'AuthController@pay')->middleware('password.confirm');
             Route::get('api_token/update', 'AuthController@updateTokne');
+            Route::get('send_html', 'MailController@html');
+            Route::get('send_markdown', 'MailController@markdown');
 
             Route::get('books/{book?}', 'PolicyController@show')->name('books');
             Route::post('books', 'PolicyController@post');
