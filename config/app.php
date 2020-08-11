@@ -230,4 +230,7 @@ return [
 
     ],
 
+    // Slack notification endpoint.
+    'slack_webhook' => env('SLACK_WEBHOOK', ''),
+
 ];

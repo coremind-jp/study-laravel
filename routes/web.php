@@ -157,6 +157,12 @@ Route::prefix('study')->group(function () {
             ->middleware(['auth', 'verified']);
     });
 
+    Route::prefix('notification')->group(function () {
+        Route::get('/', 'NotificationController@index');
+        Route::post('notify', 'NotificationController@notify');
+        Route::get('read/{id}', 'NotificationController@read');
+    });
+
     Route::fallback(function () {
         return view('routes.fallback', ['from' => 'study']);
     });

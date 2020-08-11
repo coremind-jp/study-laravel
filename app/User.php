@@ -39,4 +39,9 @@ class User extends Authenticatable implements MustVerifyEmail, CanResetPassword
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function routeNotificationForSlack($driver, $notification = null)
+    {
+        return config('app.slack_webhook');
+    }
 }
