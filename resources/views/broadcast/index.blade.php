@@ -23,7 +23,7 @@
     </div>
 
     <button id="submit" type="submit" class="btn btn-primary" disabled>ブロードキャスト送信</button>
-    <a href="{{ action('AuthController@home') }}">ホーム</a>
+    <p><a href="{{ action('AuthController@home') }}">ホーム</a></p>
   </x-block>
 
   <x-block about="PUSHERを利用した{{ $name }}ブロードキャスト受信">

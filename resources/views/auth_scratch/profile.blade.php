@@ -9,6 +9,6 @@
       <li>名前：{{ $name }}</li>
       <li>メールアドレス：{{ $email }} </li>
     </ul>
-    <a href="{{ action('AuthController@home') }}">ホーム</a>
+    <p><a href="{{ action('AuthController@home') }}">ホーム</a></p>
   </x-block>
 @endsection

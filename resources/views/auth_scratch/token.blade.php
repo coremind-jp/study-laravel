@@ -9,6 +9,6 @@
 @section('main')
   <x-block about="APIトークンの更新">
     <p>新しいトークンは {{ $token }} です。</p>
-    <a href="{{ action('AuthController@home') }}">ホーム</a>
+    <p><a href="{{ action('AuthController@home') }}">ホーム</a></p>
   </x-block>
 @endsection

@@ -23,6 +23,6 @@
 
       <button type="submit" class="btn btn-primary">支払確定</button>
     </form>
-    <a href="{{ action('AuthController@home') }}">ホーム</a>
+    <p><a href="{{ action('AuthController@home') }}">ホーム</a></p>
   </x-block>
 @endsection

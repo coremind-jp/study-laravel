@@ -48,6 +48,6 @@
         <small class="form-text text-danger">{{ $message }}</small>
       </div>
     @enderror
-    <a href="{{ action('AuthController@home') }}">ホーム</a>
+    <p><a href="{{ action('AuthController@home') }}">ホーム</a></p>
   </x-block>
 @endsection
