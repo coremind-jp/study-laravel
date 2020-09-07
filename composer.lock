@@ -5,9 +5,6 @@
         "This file is @generated automatically"
     ],
     "content-hash": "fe219304ce14ce07979da366ea928fb3",
-    "require": {
-        "php":"^7.3 || ^8.0"
-    },
     "packages": [
         {
             "name": "asm89/stack-cors",
