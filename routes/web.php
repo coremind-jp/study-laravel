@@ -119,6 +119,8 @@ Route::prefix('study')->group(function () {
 
     Route::prefix('auth')->group(function () {
         Auth::routes(['verify' => true]);
+        Route::get('oauth/{provider}', 'AuthController@oauth');
+        Route::get('oauth/{provider}/callback', 'AuthController@oauthCallback');
 
         Route::middleware(['auth', 'verified'])->group(function () {
             Route::get('home', 'AuthController@home');

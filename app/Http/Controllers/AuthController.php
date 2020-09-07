@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
+use Laravel\Socialite\Facades\Socialite;
 
 class AuthController extends Controller
 {
@@ -45,5 +46,16 @@ class AuthController extends Controller
     {
         return view('auth_scratch.pay', [
         ]);
+    }
+
+    public function oauth($provider)
+    {
+        return Socialite::driver($provider)->redirect();
+    }
+
+    public function oauthCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+        return $user->token;
     }
 }
