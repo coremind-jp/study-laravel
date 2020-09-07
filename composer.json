@@ -20,7 +20,6 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.1",
         "moontoast/math": "1.1.2 as 1.999.999",
-        "phpseclib/bcmath_compat": "1.0.5",
         "pusher/pusher-php-server": "~4.0"
     },
     "require-dev": {
